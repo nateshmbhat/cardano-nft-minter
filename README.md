@@ -14,6 +14,7 @@ Script includes options to :
 
 ## Sample Run : 
 
+```
 ❯ ./mint_nft.bash
 ---------------------------------------------------
 ===================================================
@@ -129,3 +130,4 @@ Updated Utxo transaction table
                            TxHash                                 TxIx        Amount
 --------------------------------------------------------------------------------------
 1ddc165e2b8a4a2efb382ffec792d2d483bebe2e96d8c23b09413557e9932a11     0        999803787 lovelace + 1 07a159beabe88c6fea4274e622ba860d54618b3116e7420528000ec3.MyWonderfulToken + TxOutDatumHashNone
+```
