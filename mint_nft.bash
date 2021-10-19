@@ -46,21 +46,18 @@ cd $tokenname
 cardano-cli address build --payment-verification-key-file payment.vkey --out-file payment.addr --testnet-magic $TESTNETMAGIC) && echo generated payment keys
 
 address=$(cat payment.addr)
-# [[ -f payment.skey && -f payment.vkey ]] || $(echo generating payment keys && \
-# cardano-cli address key-gen --verification-key-file payment.vkey --signing-key-file payment.skey && \
-# cardano-cli address build --payment-verification-key-file payment.vkey --out-file payment.addr --testnet-magic $TESTNETMAGIC && \
-# echo generated payment.skey and payment.vkey)
-
-address=$(cat payment.addr)
 echo ------------------------------------------------------
 echo payment address = $address
 echo Make sure you add some ada into this address. \
 You can use the faucet here : https://testnets.cardano.org/en/testnets/cardano/tools/faucet/  to request for test Ada if you are on testnet
 echo ------------------------------------------------------
+echo ;echo;
 read -p "After you have loaded some ada, Press Enter to continue : "
 
 echo Showing Utxo transaction table
 cardano-cli query utxo --address $address --testnet-magic $TESTNETMAGIC
+
+echo;echo;
 read -p "If you see your transaction, Press Enter to continue : "
 
 echo Fetching protocol parameters into protocol.json
@@ -103,7 +100,9 @@ echo created the below policy script :
 echo ------------------------------------------
 cat policy/policy.script
 echo ------------------------------------------
+echo;echo;
 read -p "Press Enter to continue : "
+echo;echo;
 
 
 cardano-cli query tip --testnet-magic $TESTNETMAGIC
@@ -134,6 +133,7 @@ echo created the below metadata.json :
 echo ------------------------------------------
 cat metadata.json
 echo ------------------------------------------
+echo ; echo;
 read -p "Press Enter to continue : "
 
 
@@ -151,6 +151,7 @@ echo slot number=$slotnumber
 echo script=$script
 echo --------------------------------
 
+echo ; echo ; 
 read -p 'Enter input transaction hash :' txhash 
 read -p 'Enter transaction index (TxIx) :' txix
 read -p 'Enter the current utxo amount (In lovelace) : ' funds
@@ -168,6 +169,7 @@ cardano-cli transaction build-raw \
 fee=$(cardano-cli transaction calculate-min-fee --tx-body-file matx.raw --tx-in-count 1 --tx-out-count 1 --witness-count 2 --testnet-magic $TESTNETMAGIC --protocol-params-file protocol.json | cut -d " " -f1)
 output=$(expr $funds - $fee)
 
+echo ; echo ; 
 echo calculated fees = $fee
 echo calculated output = funds - fees = $output
 
@@ -185,6 +187,7 @@ cardano-cli transaction build-raw \
 --out-file matx.raw
 
 
+echo ; echo ; 
 echo Signing transaction
 cardano-cli transaction sign  \
 --signing-key-file payment.skey  \
@@ -193,6 +196,11 @@ cardano-cli transaction sign  \
 --out-file matx.signed
 
 
+echo ; echo ; 
 read -p 'Press Enter to submit the transaction to the network : '
 echo Submitting the transaction to network
 cardano-cli transaction submit --tx-file matx.signed --testnet-magic $TESTNETMAGIC
+
+echo; echo;
+echo Updated Utxo transaction table
+cardano-cli query utxo --address $address --testnet-magic $TESTNETMAGIC
