@@ -1,2 +1,2 @@
-# cardano-token-minter
-A script that handles minting cardano native tokens and clean up operations in a self contained, interactive way.
+# cardano-nft-minter
+A script that handles minting cardano NFT tokens in a self contained and interactive way.
