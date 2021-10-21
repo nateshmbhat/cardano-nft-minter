@@ -1,5 +1,5 @@
 # cardano-nft-minter
-### A script that handles minting cardano NFT tokens in a self contained and interactive way.
+### A script that handles minting cardano NFT tokens in a simple and interactive way.
 
 Script includes options to : 
 - Choose the cardano network (testnet or mainnet)
