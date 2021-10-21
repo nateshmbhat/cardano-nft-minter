@@ -34,7 +34,7 @@ echo selected network with magic : $TESTNETMAGIC
 read -p 'Enter token name (without space) : ' tokenname
 read -p 'Enter token amount (usually 1): ' tokenamount
 read -p 'Enter image ipfs cid : ' ipfs_cid
-fee="0"
+fee="300000" #placeholder fee : source = https://github.com/cardano-foundation/developer-portal/pull/283
 output="0"
 
 mkdir -p tokens
